@@ -839,6 +839,7 @@ img {
   .portfolio_content{
     margin-right: 100px;
   }
+
   .about_container,
   .skills_container,
   .skills_content,
@@ -1003,6 +1004,9 @@ img {
   }
   .swiper-button-next{
     left: -3.5rem;
+  }
+  .skills_content{
+    grid-template-columns: repeat(2, 1fr);
   }
   .swiper-container-horizontal > .swiper-pagination-bullets{
     bottom: -4.5rem;
