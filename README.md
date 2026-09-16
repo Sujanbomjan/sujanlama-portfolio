@@ -73,10 +73,12 @@ The site is a static build served by **Cloudflare Workers** (static assets), con
 **Workers & Pages → sujanlama-portfolio → Settings → Build → Variables and secrets**. Otherwise the deployed contact form
 falls back to email.
 
-The custom domains `lamasujan.com.np` and `www.lamasujan.com.np` are declared under `routes` in `wrangler.jsonc`, so each
-deploy keeps them attached to the Worker. Cloudflare creates their DNS records itself and refuses if other A, AAAA or CNAME
-records already exist for those hostnames (error `100117`) — delete those records in **DNS → Records** first.
-`workers_dev: true` keeps the `*.workers.dev` URL working alongside the custom domains.
+`lamasujan.com.np/*` and `www.lamasujan.com.np/*` are Worker **routes** in `wrangler.jsonc`, so the Worker answers every
+request on both hostnames. Routes need the hostnames' DNS records to stay **proxied** (orange cloud); whatever those records
+point to is never contacted. `workers_dev: true` keeps the `*.workers.dev` URL working too.
+
+To switch to Custom Domains instead (`"custom_domain": true`, no `/*`), first delete the existing A, AAAA and CNAME records
+for both hostnames in **DNS → Records** — Cloudflare refuses to attach a Custom Domain while they exist (error `100117`).
 
 pnpm 12 only runs dependency install scripts that are approved in `pnpm-workspace.yaml` (`allowBuilds`);
 `esbuild` and `workerd` must stay approved for Wrangler to install.

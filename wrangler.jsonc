@@ -5,8 +5,8 @@
   "workers_dev": true,
   "preview_urls": true,
   "routes": [
-    { "pattern": "lamasujan.com.np", "custom_domain": true },
-    { "pattern": "www.lamasujan.com.np", "custom_domain": true },
+    { "pattern": "lamasujan.com.np/*", "zone_name": "lamasujan.com.np" },
+    { "pattern": "www.lamasujan.com.np/*", "zone_name": "lamasujan.com.np" },
   ],
   "build": {
     "command": "pnpm run build",
