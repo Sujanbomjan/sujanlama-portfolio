@@ -2,6 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sujanlama-portfolio",
   "compatibility_date": "2026-09-15",
+  "routes": [
+    { "pattern": "lamasujan.com.np", "custom_domain": true },
+    { "pattern": "www.lamasujan.com.np", "custom_domain": true },
+  ],
   "build": {
     "command": "pnpm run build",
   },

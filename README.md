@@ -71,7 +71,10 @@ The site is a static build served by **Cloudflare Workers** (static assets), con
 
 `.env` is not committed, so add each `VITE_FIREBASE_*` value in the Cloudflare dashboard under
 **Workers & Pages → sujanlama-portfolio → Settings → Build → Variables and secrets**. Otherwise the deployed contact form
-falls back to email. The custom domain `lamasujan.com.np` is attached under **Settings → Domains & Routes**.
+falls back to email.
+
+The custom domains `lamasujan.com.np` and `www.lamasujan.com.np` are declared under `routes` in `wrangler.jsonc`, so each
+deploy keeps them attached to the Worker (Wrangler replaces conflicting DNS records when it runs in CI).
 
 pnpm 12 only runs dependency install scripts that are approved in `pnpm-workspace.yaml` (`allowBuilds`);
 `esbuild` and `workerd` must stay approved for Wrangler to install.
