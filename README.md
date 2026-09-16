@@ -74,7 +74,9 @@ The site is a static build served by **Cloudflare Workers** (static assets), con
 falls back to email.
 
 The custom domains `lamasujan.com.np` and `www.lamasujan.com.np` are declared under `routes` in `wrangler.jsonc`, so each
-deploy keeps them attached to the Worker (Wrangler replaces conflicting DNS records when it runs in CI).
+deploy keeps them attached to the Worker. Cloudflare creates their DNS records itself and refuses if other A, AAAA or CNAME
+records already exist for those hostnames (error `100117`) — delete those records in **DNS → Records** first.
+`workers_dev: true` keeps the `*.workers.dev` URL working alongside the custom domains.
 
 pnpm 12 only runs dependency install scripts that are approved in `pnpm-workspace.yaml` (`allowBuilds`);
 `esbuild` and `workerd` must stay approved for Wrangler to install.
