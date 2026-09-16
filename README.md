@@ -62,10 +62,16 @@ Without Firebase keys, or if saving fails, visitors can still send their message
 
 ## Deployment
 
-Pushing to `main` builds and deploys the site to GitHub Pages via
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+The site is a static build served by **Cloudflare Workers** (static assets), configured in
+[`wrangler.jsonc`](wrangler.jsonc). `wrangler deploy` runs `pnpm run build` itself and uploads `dist/`.
 
-One-time setup in the GitHub repository:
+- **Automatic:** Cloudflare Workers Builds deploys every push to `main`. Deploy command: `pnpm run deploy`
+  (or `npx wrangler deploy`). A separate build command isn't required.
+- **Manual:** `pnpm dlx wrangler login`, then `pnpm run deploy`.
 
-1. **Settings → Pages → Build and deployment → Source:** select **GitHub Actions**. Keep the custom domain `lamasujan.com.np`.
-2. **Settings → Secrets and variables → Actions:** add each `VITE_FIREBASE_*` value from `.env.example` as a repository secret.
+`.env` is not committed, so add each `VITE_FIREBASE_*` value in the Cloudflare dashboard under
+**Workers & Pages → sujanlama-portfolio → Settings → Build → Variables and secrets**. Otherwise the deployed contact form
+falls back to email. The custom domain `lamasujan.com.np` is attached under **Settings → Domains & Routes**.
+
+pnpm 12 only runs dependency install scripts that are approved in `pnpm-workspace.yaml` (`allowBuilds`);
+`esbuild` and `workerd` must stay approved for Wrangler to install.

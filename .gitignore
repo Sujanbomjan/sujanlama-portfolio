@@ -20,6 +20,9 @@ dist-ssr
 # Firebase CLI
 .firebase/
 
+# Cloudflare Wrangler
+.wrangler/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
